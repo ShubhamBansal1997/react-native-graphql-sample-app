@@ -2,7 +2,7 @@
 * @Author: Shubham Bansal
 * @Date:   2018-02-05 22:40:07
 * @Last Modified by:   Shubham Bansal
-* @Last Modified time: 2018-02-06 00:19:26
+* @Last Modified time: 2018-02-08 02:33:46
 */
 import React, { Component } from 'react';
 import {
@@ -15,12 +15,15 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import ApolloClient, { createNetworkInterface } from 'apollo-client';
 
-import { HttpLink } from 'apollo-link-http';
-import { InMemoryCache } from 'apollo-cache-inmemory';
+//import { HttpLink } from 'apollo-link-http';
+//import { InMemoryCache } from 'apollo-cache-inmemory';
+
+const networkInterface = createNetworkInterface({
+  uri: 'http://localhost:8080/graphql'
+});
 
 const client = new ApolloClient({
-  link: new HttpLink({ uri: 'http://localhost:8080/graphql' }),
-  cache: new InMemoryCache()
+  networkInterface,
 });
 
 const store = createStore(
